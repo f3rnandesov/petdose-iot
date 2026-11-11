@@ -35,7 +35,7 @@ A interface administrativa foi desenvolvida em **Python (NiceGUI)** e provê:
 ##  Como Executar o Projeto
 
 ### 1. Simulação do Hardware (Wokwi)
-- Acesse o projeto no Wokwi: `[Inserir Link da Simulação do Wokwi Aqui]`
+- Acesse o projeto no Wokwi: https://wokwi.com/projects/480415688896942081
 - Certifique-se de que a biblioteca `ESP32Servo` e `PubSubClient` estão configuradas.
 - Inicie a simulação para conectar o dispositivo à rede e ao broker MQTT.
 
