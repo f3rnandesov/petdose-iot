@@ -1,0 +1,21 @@
+# Ambientes Virtuais Python
+.venv/
+.venv_arduino/
+venv/
+ENV/
+
+# Cache do Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Configurações de IDE e SO
+.vscode/
+.idea/
+.DS_Store
+*.swp
+
+# Ficheiros de log ou binários de compilação
+*.log
+*.bin
+*.hex
