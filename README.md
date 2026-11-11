@@ -5,7 +5,7 @@
 ![MQTT](https://img.shields.io/badge/Protocolo-MQTT-660066?logo=eclipse-mosquitto)
 ![Status](https://img.shields.io/badge/MVP-Conclu%C3%ADdo-brightgreen)
 
-O **PetDose** é uma solução IoT baseada no conceito de **Inovação Frugal**, projetada para otimizar o processo de alimentação animal em ONGs, abrigos comunitários e serviços de hospedagem pet em São Luís - MA. 
+O **PetDose** é uma solução IoT baseada no conceito de Inovação Frugal, projetada para otimizar o processo de alimentação animal em ONGs, abrigos comunitários e serviços de hospedagem pet em São Luís - MA. 
 
 Diferente de dispensadores convencionais, o PetDose utiliza sensorização dupla (Ultrassónica + Optoeletrónica) para validar a entrega real do alimento e detetar bloqueios mecânicos em tempo real, integrando-se a um modelo de negócio por assinatura (**SaaS**).
 
