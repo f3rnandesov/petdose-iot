@@ -300,11 +300,10 @@ def painel_principal():
                 with ui.row().classes('w-full justify-between items-center'):
                     with ui.column().classes('gap-0'):
                         ui.label('Visão Geral Operacional').classes('text-2xl font-extrabold text-slate-800 tracking-tight')
-                        ui.label('Acompanhamento em tempo real do reservatório, pesagem automática e refeições').classes('text-xs text-slate-500')
+                        ui.label('Acompanhamento em tempo real do reservatório e das refeições').classes('text-xs text-slate-500')
                     with ui.row().classes('items-center gap-2'):
                         ui.button('Verificar Conexão', on_click=verificar_conexao_comedouro, icon='wifi_tethering').props('outline dense no-caps color=blue-700').classes('px-3 py-1.5 bg-white text-xs font-semibold rounded-lg')
                         ui.button('Atualizar Comedouro', on_click=lambda: (sincronizar_pet_ativo(), ui.notify('Dieta enviada ao comedouro', type='info')), icon='sync').props('outline dense no-caps color=slate-700').classes('px-3 py-1.5 bg-white text-xs font-semibold rounded-lg')
-
                 # LINHA 1: 3 CARDS DE KPI NIVELADOS
                 with ui.element('div').classes('grid grid-cols-1 md:grid-cols-3 gap-6 w-full'):
 
@@ -321,11 +320,11 @@ def painel_principal():
                         with ui.row().classes('w-full justify-between items-center'):
                             ui.label('Status do Comedouro').classes('text-xs font-bold text-slate-400 uppercase tracking-wider')
                             with ui.avatar(color='blue-50', text_color='blue-600', size='sm'):
-                                ui.icon('scale', size='xs')
+                                ui.icon('timer', size='xs')
                         status_label = ui.label(estado['status']).classes('text-lg font-bold text-slate-800 my-3 leading-snug')
                         with ui.row().classes('items-center gap-1.5'):
                             ui.icon('verified', color='blue-500', size='xs')
-                            ui.label('Pesagem automática de precisão ativa').classes('text-xs text-slate-500 font-medium')
+                            ui.label('Dosagem por tempo calibrado').classes('text-xs text-slate-500 font-medium')
 
                     with ui.card().classes('h-full bg-white shadow-sm rounded-2xl p-6 border border-slate-200 flex flex-col justify-between'):
                         with ui.row().classes('w-full justify-between items-center'):
@@ -344,7 +343,7 @@ def painel_principal():
                             with ui.row().classes('w-full justify-between items-start'):
                                 with ui.column().classes('gap-0.5'):
                                     ui.label('Alimentação Sob Demanda').classes('text-lg font-bold text-slate-800')
-                                    ui.label('Dosagem pesada individualmente para cada pet').classes('text-xs text-slate-500')
+                                    ui.label('Porção calibrada individualmente para cada pet').classes('text-xs text-slate-500')
                                 ui.button('Perfis', on_click=lambda: selecionar_aba('pets'), icon='tune').props('flat dense no-caps color=blue-600').classes('text-xs')
 
                             opcoes_iniciais = list(pets.keys())[:max_pets] if max_pets else list(pets.keys())
@@ -378,7 +377,7 @@ def painel_principal():
 
                         with ui.column().classes('w-full pt-5 mt-4 border-t border-slate-100 gap-2'):
                             ui.button(
-                                'SERVIR PORÇÃO EXATA AGORA',
+                                'SERVIR PORÇÃO AGORA',
                                 on_click=lambda: enviar_comando_alimentar(estado['pet_selecionado'], "Manual"),
                                 icon='play_arrow'
                             ).classes('w-full py-3.5 font-bold text-white shadow-md tracking-wide').props('color=blue-600 rounded')

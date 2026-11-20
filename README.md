@@ -32,6 +32,54 @@ A interface administrativa foi desenvolvida em **Python (NiceGUI)** e provê:
 
 ---
 
+##  Montagem na Bancada (ESP32 real)
+
+### Ligações
+
+| Componente | Pino do componente | Ligar em |
+|---|---|---|
+| HC-SR04 | VCC | 5V (VIN do ESP32) |
+| HC-SR04 | GND | GND |
+| HC-SR04 | TRIG | GPIO 5 |
+| HC-SR04 | ECHO | GPIO 19 **via divisor de tensão** (ver abaixo) |
+| Servo SG90 | Marrom (GND) | GND |
+| Servo SG90 | Vermelho (+) | 5V (de preferência fonte externa) |
+| Servo SG90 | Laranja (sinal) | GPIO 18 |
+| Botão | um terminal | GPIO 4 |
+| Botão | outro terminal | GND |
+
+**Divisor de tensão no ECHO:** o HC-SR04 devolve 5 V e o ESP32 aceita no máximo 3,3 V.
+Ligue `ECHO → resistor 1 kΩ → GPIO 19` e `GPIO 19 → resistor 2 kΩ → GND`.
+Sem isso o sensor pode funcionar por um tempo, mas danifica o pino do ESP32.
+
+**Alimentação do servo:** o servo puxa picos de corrente que podem reiniciar o ESP32
+(sintoma: o ESP reinicia quando a comporta abre). Use uma fonte 5 V separada ou um
+capacitor de 470–1000 µF entre 5V e GND do servo. **O GND da fonte e do ESP32 devem estar unidos.**
+
+### Configuração do firmware (`firmware/sketch.ino`)
+
+1. Preencha `ssid` e `password` com a rede da bancada. Recomendação: roteador do celular,
+   pois redes institucionais costumam bloquear a porta 1883 do MQTT.
+2. Instale na Arduino IDE as bibliotecas **PubSubClient**, **ESP32Servo** e **ArduinoJson**.
+
+### Calibração do reservatório
+
+1. Abra o Monitor Serial (115200). A cada 5 s aparece `[calibracao] distancia = XX cm`.
+2. Com o pote **vazio**, anote a distância → `DIST_VAZIO_CM`.
+3. Encha o pote até o máximo, anote a distância → `DIST_CHEIO_CM`
+   (o HC-SR04 não mede bem abaixo de ~3 cm; deixe essa folga entre o sensor e a ração).
+4. Pese quanto de ração coube → `CAPACIDADE_SILO_G`.
+
+### Calibração da dosagem
+
+1. Coloque um pote sobre uma balança de cozinha embaixo da saída.
+2. Configure no dashboard um pet com porção de 250 g e mande servir.
+3. Pese o que caiu: `VAZAO_G_POR_S = 25.0 × (peso real ÷ 250)`.
+4. Repita 2–3 vezes e use a média. Ajuste `SERVO_ABERTO`/`SERVO_FECHADO` se a comporta
+   não abrir ou fechar totalmente.
+
+---
+
 ##  Como Executar o Projeto
 
 ### 1. Simulação do Hardware (Wokwi)
@@ -50,7 +98,7 @@ python3 -m venv .venv
 source .venv/bin/activate
 
 # Instale as dependências
-pip install -r requirements.txt
+pip install -r requeriments.txt
 
 # Execute a aplicação
-python3 dashboard/main.py
+python3 dashboard/dashbord_wokwi.py
